@@ -1,9 +1,36 @@
-:root {
-  --font-display:
-    Spline Sans, Inter, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji,
-    Segoe UI Symbol, Noto Color Emoji;
-  --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-  --font-rounded: 'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif;
-  --font-serif: Georgia, 'Times New Roman', serif;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@import "nativewind/theme";
+
+
+@theme {
+
+  --color-forest: #1e4d36;
+  --color-forest-deep: #163a28;
+  --color-sage: #9db5a6;
+  --color-sage-soft: #e7f1ea;
+  --color-sand: #dcebe1;
+  --color-sand-soft: #f1f3f2;
+  --color-paper: #f7f8f6;
+  --color-ink: #121413;
+  --color-ink-muted: #858a87;
+  --color-line: #ebedeb;
+  --color-clay: #1e4d36;
+  --color-lime: #c9f26b;
+  --color-danger: #c7332e;
+
+  --radius-sm: 12px;
+  --radius-md: 26px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  --font-weight-*: initial;
+  --font-sans: Manrope_400Regular;
 }
+
+@utility font-normal { font-family: Manrope_400Regular; }
+@utility font-medium { font-family: Manrope_500Medium; }
+@utility font-semibold { font-family: Manrope_600SemiBold; }
+@utility font-bold { font-family: Manrope_700Bold; }

@@ -1,56 +1,109 @@
-# Welcome to your Expo app 👋
+# Roam
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A travel discovery app for Lagos. Find beaches, parks, galleries and food spots nearby, save the ones you like, plan day trips with several stops, follow turn-by-turn directions, and keep a photo journal of the places you visit.
 
-## Get started
+Built with Expo and React Native.
 
-1. Install dependencies
+## Features
 
-   ```bash
-   npm install
-   ```
+- **Explore**: weekend picks, places near you, filters by category
+- **Search**: recent searches, browse by mood, live results
+- **Map**: Mapbox map with photo pins and a swipeable place carousel
+- **Place details**: photos, facts, save, and directions
+- **Trips**: plan a trip with dates and stops, then view the route and itinerary
+- **Directions**: live location tracking, next turn, distance and time left, all steps
+- **Field notes**: a timeline of photos and captions from your trips
+- **Camera**: take photos with flash and front/back camera
+- **Sign up**: email, one-time code, and name, as a multi-step flow
+- **Profile**: stats, recent notes, settings, and a location on/off toggle
 
-2. Start the app
+## Tech stack
 
-   ```bash
-   npx expo start
-   ```
+| Area | Library |
+| --- | --- |
+| Framework | Expo SDK 58, React Native 0.88, React 19 |
+| Navigation | Expo Router |
+| Styling | NativeWind v5 (Tailwind CSS) |
+| Maps and directions | @rnmapbox/maps, Mapbox Directions API |
+| State | Zustand with AsyncStorage |
+| Forms | react-hook-form and zod |
+| Bottom sheets | @gorhom/bottom-sheet |
+| Animation | Reanimated 4 |
+| Device | expo-location, expo-camera, expo-image |
 
-In the output, you'll find options to open the app in a
+## Getting started
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### 1. Requirements
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- Node.js 20 or newer
+- Xcode (iOS) or Android Studio (Android)
+- A free [Mapbox](https://account.mapbox.com/) account for a public access token
 
-## Get a fresh project
+The app uses native modules (Mapbox, camera), so it does **not** run in Expo Go. You need a development build.
 
-When you're ready, run:
+### 2. Install
 
 ```bash
-npm run reset-project
+git clone https://github.com/Solomon13693/roam.git
+cd roam
+npm install
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+### 3. Add your keys
 
-### Other setup steps
+```bash
+cp .env.example .env
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Open `.env` and set your Mapbox public token (it starts with `pk.`):
 
-## Learn more
+```
+EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN=pk.your-mapbox-public-token
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+`.env` is ignored by git, so your key stays on your machine.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### 4. Run
 
-## Join the community
+```bash
+npx expo run:ios       # iOS simulator
+npx expo run:ios --device   # your iPhone
+npx expo run:android   # Android emulator or device
+```
 
-Join our community of developers creating universal apps.
+After the first build, you can start the dev server on its own:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+npx expo start
+```
+
+## Scripts
+
+```bash
+npx expo lint     # lint
+npx tsc --noEmit  # typecheck
+npm run icons     # rebuild the icon set from assets/icons
+```
+
+## Project structure
+
+```
+src/
+  app/          routes (Expo Router): tabs, auth, place, trip, notes, camera
+  features/     one folder per screen, each with its own components
+  components/   shared UI: buttons, chips, sheets, modals, icons, layout
+  hooks/        location, camera, sheets, multi-step flows
+  stores/       Zustand stores
+  service/      API calls (Mapbox Directions)
+  data/         sample places, trips and field notes
+  constants/    colours and images
+  lib/          helpers
+assets/
+  icons/        SVG icons (compiled by scripts/generate-icons.mjs)
+  images/       app icon, splash, place photos
+```
+
+## Notes
+
+- Places, trips and field notes are sample data in `src/data`. There is no backend yet.
+- Directions use the Mapbox Directions API with the token from `.env`.
